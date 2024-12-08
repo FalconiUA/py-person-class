@@ -8,16 +8,12 @@ class Person:
 
 
 def create_person_list(people: list[dict[str, str | int]]) -> list[Person]:
-    person_list = []
+    person_list = [
+        Person(name=person_dict["name"],
+               age=person_dict["age"])
+        for person_dict in people
+    ]
 
-    # Перший цикл: створення екземплярів
-    for person_dict in people:
-        name = person_dict["name"]
-        age = person_dict["age"]
-        person = Person(name, age)
-        person_list.append(person)
-
-    # Другий цикл: встановлення wife і husband
     for person_dict in people:
         person = Person.people[person_dict["name"]]
         if wife_name := person_dict.get("wife"):
